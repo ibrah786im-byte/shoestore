@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>ShoeStore — Full Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img id="logoImg" src="" alt="logo" class="logo" />
+      <div>
+        <h1 id="siteTitle">ShoeStore</h1>
+        <small id="siteTag">Modern shoes shop</small>
+      </div>
+    </div>
+    <nav>
+      <button class="navbtn" data-route="#" onclick="route('/')">Home</button>
+      <button class="navbtn" data-route="#/shop" onclick="route('/shop')">Shop</button>
+      <button class="navbtn" data-route="#/cart" onclick="route('/cart')">Cart <span id="cartCount" class="badge">0</span></button>
+      <button class="navbtn primary" onclick="openAdmin()">Admin</button>
+    </nav>
+  </header>
+
+  <main id="app" class="container">
+    <!-- content injected by app.js -->
+  </main>
+
+  <!-- Admin / Settings Drawer -->
+  <aside id="adminDrawer" class="drawer">
+    <div class="drawer-head">
+      <h2>Admin • Settings</h2>
+      <button class="close" onclick="closeAdmin()">✕</button>
+    </div>
+
+    <section class="pane">
+      <h3>Site Settings</h3>
+      <label>Site Title</label>
+      <input id="settingTitle" type="text" />
+      <label>Tagline</label>
+      <input id="settingTag" type="text" />
+      <label>Primary Color</label>
+      <input id="settingPrimary" type="color" />
+      <label>Background Color</label>
+      <input id="settingBg" type="color" />
+      <label>Text Color</label>
+      <input id="settingText" type="color" />
+      <label>Logo (URL)</label>
+      <input id="settingLogo" type="text" placeholder="https://..." />
+      <label>Upload Logo</label>
+      <input id="settingLogoFile" type="file" accept="image/*" />
+      <div style="margin-top:.6rem;display:flex;gap:.6rem;justify-content:flex-end">
+        <button onclick="resetTheme()" class="btn">Reset</button>
+        <button onclick="saveSettings()" class="btn primary">Save</button>
+      </div>
+    </section>
+
+    <section class="pane">
+      <h3>Products</h3>
+      <div class="form-grid">
+        <input id="p_name" placeholder="Name" />
+        <input id="p_price" type="number" placeholder="Price" />
+        <input id="p_stock" type="number" placeholder="Stock" />
+        <select id="p_cat"><option>Sneakers</option><option>Boots</option><option>Sandals</option><option>Formal</option></select>
+        <input id="p_img" placeholder="Image URL" />
+        <input id="p_file" type="file" accept="image/*" />
+      </div>
+      <div style="display:flex;gap:.6rem;justify-content:flex-end;margin-top:.5rem">
+        <button onclick="clearProductForm()" class="btn">Clear</button>
+        <button onclick="saveProduct()" class="btn primary" id="saveProductBtn">Add Product</button>
+      </div>
+
+      <hr />
+
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <button onclick="exportProducts()" class="btn">Export JSON</button>
+        <button onclick="importProductsPrompt()" class="btn">Import JSON</button>
+        <button onclick="loadSample()" class="btn">Load Sample</button>
+        <button onclick="clearAllData()" class="btn danger">Clear All Data</button>
+      </div>
+
+      <h4 style="margin-top:12px">Products List</h4>
+      <div id="adminProductList" class="admin-list"></div>
+    </section>
+  </aside>
+
+  <!-- Modal (product details) -->
+  <div id="modal" class="modal" onclick="if(event.target===this) closeModal()">
+    <div class="modal-card" id="modalCard"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
